@@ -6,8 +6,8 @@ spring:
   application:
     name: productdb
 
-  datasource: # TODO :: change db name with productdb
-    url: jdbc:mysql://localhost:3306/product_management
+  datasource:
+    url: jdbc:mysql://localhost:3306/productdb
     username: root
     password: P@55w0Rd#01
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -24,11 +24,19 @@ spring:
     enabled: true
     change-log: classpath:db/master.xml
 
+  security:
+    user:
+      name: user # default username
+      password: password # default password
+  jwt:
+    secret: secretkey123hfjdfhkfhdfjdshfkskshfkjshdfkdfhskdhfkjsdhkf
+    expiration: 3600000 # 1 hour expiration in milliseconds
+
 logging:
   level:
     org:
       springframework: INFO
-      com.company.product: DEBUG
+      com.company: DEBUG
 
 springdoc:
   api-docs:

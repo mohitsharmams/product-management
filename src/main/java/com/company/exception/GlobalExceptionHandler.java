@@ -25,8 +25,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         List<ObjectError> allErrors = ex.getBindingResult().getAllErrors();
-        StringBuilder errorMessage = new StringBuilder();
-        for (ObjectError error : allErrors) {
+        var errorMessage = new StringBuilder();
+        for (var error : allErrors) {
             errorMessage.append(error.getDefaultMessage());
             if (allErrors.size() > 1 && allErrors.indexOf(error) != allErrors.size() - 1) {
                 errorMessage.append(" | ");
