@@ -2,6 +2,7 @@ package com.company.controller;
 
 import com.company.jpa.dto.ProductDto;
 import com.company.service.ProductService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
+@Tag(name = "Product Controller", description = "For Product Operations")
 public class ProductController {
 
     private final ProductService productService;

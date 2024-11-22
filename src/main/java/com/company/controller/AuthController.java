@@ -3,6 +3,7 @@ package com.company.controller;
 import com.company.jpa.dto.LoginRequest;
 import com.company.jpa.dto.LoginResponse;
 import com.company.security.jwt.JwtTokenProvider;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Tag(name = "Auth Controller", description = "For Authentication")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
