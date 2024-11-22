@@ -27,6 +27,6 @@ public class AuthController {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
-        return ResponseEntity.ok(jwtTokenProvider.createToken(loginRequest.getUsername()));
+        return ResponseEntity.ok(jwtTokenProvider.generateToken(loginRequest.getUsername()));
     }
 }

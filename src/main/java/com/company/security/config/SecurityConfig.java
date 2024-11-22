@@ -1,8 +1,8 @@
 package com.company.security.config;
 
+import com.company.exception.handler.AccessDeniedExceptionHandler;
 import com.company.exception.handler.AuthenticationEntryPointHandler;
 import com.company.security.CustomUserDetailsService;
-import com.company.security.constants.SecurityConstants;
 import com.company.security.filters.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +30,8 @@ public class SecurityConfig {
 
     private final AuthenticationEntryPointHandler authenticationEntryPointHandler;
 
+    private final AccessDeniedExceptionHandler accessDeniedExceptionHandler;
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -50,6 +52,8 @@ public class SecurityConfig {
                         .requestMatchers(AUTH_WHITELIST).permitAll()
                         .anyRequest().authenticated())
                 .authenticationProvider(daoAuthenticationProvider())
+                .exceptionHandling(exception -> exception.accessDeniedHandler(accessDeniedExceptionHandler))
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPointHandler))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

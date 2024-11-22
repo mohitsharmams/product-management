@@ -1,7 +1,9 @@
-package com.company.exception;
+package com.company.exception.handler;
 
 import com.company.enums.ErrorCodes;
+import com.company.exception.ResourceNotFoundException;
 import com.company.jpa.dto.ErrorResponse;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;

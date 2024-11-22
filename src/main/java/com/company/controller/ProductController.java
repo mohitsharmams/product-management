@@ -4,6 +4,7 @@ import com.company.jpa.dto.ProductDto;
 import com.company.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,8 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<ProductDto> getAllProducts() {
-        return productService.getAllProducts();
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/{id}")
@@ -27,19 +28,19 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductDto createProduct(@Valid @RequestBody ProductDto productDTO) {
-        return productService.saveProduct(productDTO);
+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDTO) {
+        return new ResponseEntity<>(productService.saveProduct(productDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ProductDto updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto productDTO) {
-        return productService.updateProduct(id, productDTO);
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto productDTO) {
+        return ResponseEntity.ok(productService.updateProduct(id, productDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body("Product deleted with id: " + id);
     }
 
 }

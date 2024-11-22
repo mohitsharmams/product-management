@@ -20,7 +20,7 @@ public class JwtTokenProvider {
     @Value("${spring.jwt.expiration}")
     private long validityInMilliseconds;
 
-    public LoginResponse createToken(String username) {
+    public LoginResponse generateToken(String username) {
         var key = Keys.hmacShaKeyFor(secretKey.getBytes());
         var claims = Jwts.claims().setSubject(username);
         var now = new Date();

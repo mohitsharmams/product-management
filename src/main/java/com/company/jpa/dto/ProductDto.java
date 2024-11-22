@@ -1,11 +1,16 @@
 package com.company.jpa.dto;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductDto {
 
     private Long id;
@@ -16,6 +21,6 @@ public class ProductDto {
     private String description;
 
     @NotNull(message = "Price must be provided")
-    @Min(value = 0, message = "Price must be greater than 0")
+    @Min(value = 1, message = "Price must be greater than 0")
     private Double price;
 }
