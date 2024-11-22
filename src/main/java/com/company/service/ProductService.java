@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author Mohit Sharma
+ */
 @Service
 public interface ProductService {
 

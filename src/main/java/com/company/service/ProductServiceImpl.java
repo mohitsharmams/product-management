@@ -23,6 +23,11 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private final ProductMapper productMapper;
 
+    /**
+     * Retrieves all products from the repository and maps them to DTOs.
+     *
+     * @return a list of all products as ProductDto objects
+     */
     @Override
     public List<ProductDto> getAllProducts() {
         log.info("Fetching product list");
@@ -31,6 +36,13 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
     }
 
+    /**
+     * Retrieves a product by its ID.
+     *
+     * @param id the ID of the product to be retrieved
+     * @return the product as a ProductDto
+     * @throws ResourceNotFoundException if no product with the given ID is found
+     */
     @Override
     public ProductDto getProductById(Long id) {
         log.info("Request to get product by id : {}", id);
@@ -38,6 +50,12 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.PRODUCT_NOT_FOUND, "Product not found with id: " + id)));
     }
 
+    /**
+     * Creates a new product from the provided ProductDto.
+     *
+     * @param productDTO the product data to be saved
+     * @return the created product as a ProductDto
+     */
     @Override
     public ProductDto saveProduct(ProductDto productDTO) {
         log.info("Adding new product with name : {}", productDTO.getName());
@@ -45,6 +63,14 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toDto(productRepository.save(product));
     }
 
+    /**
+     * Updates an existing product by its ID.
+     *
+     * @param id         the ID of the product to be updated
+     * @param productDTO the new product data to update the product with
+     * @return the updated product as a ProductDto
+     * @throws ResourceNotFoundException if no product with the given ID is found
+     */
     @Override
     public ProductDto updateProduct(Long id, ProductDto productDTO) {
         Product product = productRepository.findById(id)
@@ -56,6 +82,12 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toDto(productRepository.save(product));
     }
 
+    /**
+     * Deletes a product by its ID.
+     *
+     * @param id the ID of the product to be deleted
+     * @throws ResourceNotFoundException if no product with the given ID is found
+     */
     @Override
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {

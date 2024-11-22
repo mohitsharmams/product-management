@@ -24,6 +24,12 @@ public class AuthController {
 
     private final JwtTokenProvider jwtTokenProvider;
 
+    /**
+     * Authenticates a user and returns a JWT token if successful.
+     *
+     * @param loginRequest the login credentials (username and password)
+     * @return a JWT token wrapped in a response entity if authentication is successful
+     */
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
         authenticationManager.authenticate(
