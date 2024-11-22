@@ -1,2 +1,38 @@
 server:
   port: 8080
+
+
+spring:
+  application:
+    name: productdb
+
+  datasource: # TODO :: change db name with productdb
+    url: jdbc:mysql://localhost:3306/product_management
+    username: root
+    password: P@55w0Rd#01
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/master.xml
+
+logging:
+  level:
+    org:
+      springframework: INFO
+      com.company.product: DEBUG
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
